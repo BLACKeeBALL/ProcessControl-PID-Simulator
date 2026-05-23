@@ -269,16 +269,15 @@ function drawLineChart(canvas, data, series, currentIndex = null) {
 
 function exportCSV() {
   if (!latestData.length) runSimulation();
-  const header = "time,setpoint,output,control,error
-";
+
+  const header = "time,setpoint,output,control,error\n";
   const rows = latestData.map(d => [
     d.time.toFixed(3),
     d.setpoint.toFixed(3),
     d.output.toFixed(3),
     d.control.toFixed(3),
     d.error.toFixed(3)
-  ].join(",")).join("
-");
+  ].join(",")).join("\n");
 
   const blob = new Blob([header + rows], { type: "text/csv;charset=utf-8;" });
   const url = URL.createObjectURL(blob);
