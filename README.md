@@ -1,11 +1,8 @@
+# 过程控制-PID模拟器
 
 ## 在线运行地址
 
 https://blackeeball.github.io/ProcessControl-PID-Simulator/
-
-
-
-# 过程控制-PID模拟器
 
 ## 项目简介
 
@@ -18,6 +15,7 @@ https://blackeeball.github.io/ProcessControl-PID-Simulator/
 - 温度设定值与仿真时间设置
 - 温度响应曲线绘制
 - 控制量曲线绘制
+- 动态演示：曲线按采样时刻逐步生成，显示当前仿真时间和当前时刻红线
 - 外部扰动测试
 - 控制性能指标计算：超调量、调节时间、稳态误差、IAE、ISE
 - PID 参数预设
@@ -25,17 +23,9 @@ https://blackeeball.github.io/ProcessControl-PID-Simulator/
 
 ## 运行方法
 
-下载或克隆本仓库后，直接打开：
-
-```text
-index.html
-```
-
-即可运行仿真系统。
+直接打开 `index.html`，或访问上方在线运行地址。
 
 ## 被控对象模型
-
-系统采用一阶惯性带纯滞后模型：
 
 ```math
 G(s)=\frac{K}{Ts+1}e^{-\tau s}
@@ -58,26 +48,3 @@ u(k)=K_p e(k)+K_i\sum e(k)\Delta t+K_d\frac{e(k)-e(k-1)}{\Delta t}
 ```math
 e(k)=r(k)-y(k)
 ```
-
-## 文件结构
-
-```text
-ProcessControl-PID-Simulator/
-├── index.html
-├── css/
-│   └── style.css
-├── js/
-│   ├── main.js
-│   ├── pid.js
-│   ├── plant.js
-│   └── metrics.js
-├── docs/
-│   └── images/
-└── README.md
-
-
-```
-
-## 课程设计说明
-
-本项目通过网页形式实现过程控制系统的建模、仿真与性能分析。用户可以通过修改 PID 参数观察系统响应速度、超调量、稳态误差和抗扰动能力的变化，从而理解比例、积分、微分环节在过程控制系统中的作用。

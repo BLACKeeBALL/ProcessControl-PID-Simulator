@@ -3,13 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>过程控制 PID 温度仿真系统</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <title>过程控制 PID 温度动态仿真系统</title>
+  <link rel="stylesheet" href="CSS/style.css" />
 </head>
 <body>
   <header class="app-header">
-    <h1>过程控制 PID 温度仿真系统</h1>
-    <p>一阶惯性带纯滞后对象 + PID 控制器 + 扰动测试 + 性能指标分析</p>
+    <div>
+      <h1>过程控制 PID 温度仿真系统</h1>
+      <p>一阶惯性带纯滞后对象 + PID 控制器 + 动态演示 + 扰动测试 + 性能指标分析</p>
+    </div>
   </header>
 
   <main class="layout">
@@ -21,6 +23,7 @@
         <label>设定温度 r / ℃ <input id="setpoint" type="number" value="80" step="1"></label>
         <label>仿真时间 / s <input id="simTime" type="number" value="120" step="1"></label>
         <label>采样周期 Δt / s <input id="dt" type="number" value="0.1" step="0.01"></label>
+        <label>动态速度 点/帧 <input id="speed" type="number" value="4" step="1"></label>
       </div>
 
       <div class="group">
@@ -28,6 +31,7 @@
         <label>Kp <input id="kp" type="number" value="2.0" step="0.1"></label>
         <label>Ki <input id="ki" type="number" value="0.05" step="0.01"></label>
         <label>Kd <input id="kd" type="number" value="0.8" step="0.1"></label>
+
         <div class="preset-row">
           <button data-preset="conservative">保守控制</button>
           <button data-preset="stable">稳定控制</button>
@@ -52,7 +56,9 @@
       </div>
 
       <div class="actions">
-        <button id="runBtn" class="primary">开始仿真</button>
+        <button id="runBtn" class="primary">瞬时仿真</button>
+        <button id="dynamicBtn" class="primary">动态演示</button>
+        <button id="pauseBtn">暂停/继续</button>
         <button id="csvBtn">导出 CSV</button>
         <button id="resetBtn">恢复默认</button>
       </div>
@@ -60,6 +66,7 @@
 
     <section class="content">
       <div class="cards">
+        <div class="card"><span>当前时间</span><strong id="currentTime">0.0 s</strong></div>
         <div class="card"><span>超调量</span><strong id="overshoot">--</strong></div>
         <div class="card"><span>调节时间</span><strong id="settlingTime">--</strong></div>
         <div class="card"><span>稳态误差</span><strong id="steadyError">--</strong></div>
@@ -70,7 +77,7 @@
       <section class="chart-box">
         <div class="chart-title">
           <h2>温度响应曲线</h2>
-          <p>蓝色：设定值；橙色：系统输出</p>
+          <p>蓝色：设定值；橙色：系统输出；红线：当前时刻</p>
         </div>
         <canvas id="responseChart" width="1000" height="420"></canvas>
       </section>
@@ -85,16 +92,18 @@
 
       <section class="analysis">
         <h2>结果分析</h2>
-        <p id="analysisText">点击“开始仿真”后生成分析结果。</p>
+        <p id="analysisText">点击“瞬时仿真”或“动态演示”后生成分析结果。</p>
       </section>
     </section>
   </main>
 
-  <footer>过程控制系统及仪表课程大作业 · PID Temperature Control Simulator</footer>
+  <footer>
+    过程控制系统及仪表课程大作业 · PID Temperature Control Simulator
+  </footer>
 
-  <script src="js/pid.js"></script>
-  <script src="js/plant.js"></script>
-  <script src="js/metrics.js"></script>
-  <script src="js/main.js"></script>
+  <script src="JS/pid.js"></script>
+  <script src="JS/plant.js"></script>
+  <script src="JS/metrics.js"></script>
+  <script src="JS/main.js"></script>
 </body>
 </html>
